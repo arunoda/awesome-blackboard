@@ -1,13 +1,16 @@
 var pad;
+var remotePad;
 
 Meteor.startup(function() {
   Deps.autorun(function() {
     if(pad) {
       pad.close();
+      remotePad.close();
     }
 
     var padId = Session.get('padId');
     pad = new Pad(padId);
+    remotePad = new RemotePad(padId, pad);
   });
 });
 
